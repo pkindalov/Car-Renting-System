@@ -18,3 +18,15 @@ h1{
 .menu li::after{
     content: '\00a0';
 }
+
+.mb60{
+    margin-bottom:  60px;
+}
+
+.car-details{
+    width: 50%;
+}
+
+.car-details img{
+    width: 100%;
+}
