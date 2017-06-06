@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const User = require('../data/User')
 
+require('../data/Car')
 mongoose.Promise = global.Promise
 
 module.exports = (settings) => {
