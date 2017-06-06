@@ -34,7 +34,7 @@ module.exports = {
   },
   all: (req, res) => {
     let pageSize = 2
-    let page = req.query.page || 1
+    let page = parseInt(req.query.page) || 1
 
     Car
             .find({})
@@ -43,7 +43,11 @@ module.exports = {
             .limit(pageSize)
             .then(cars => {
               res.render('cars/all', {
-                cars: cars
+                cars: cars,
+                hasPrevPage: page > 1,
+                hasNextPage: cars.length > 0,
+                prevPage: page - 1,
+                nextPage: page + 1
               })
             })
   }
