@@ -12,6 +12,7 @@ module.exports = (app) => {
   app.post('/users/logout', controllers.users.logout)
   app.get('/cars/add', auth.isInRole('Admin'), controllers.cars.addGet)
   app.post('/cars/add', auth.isInRole('Admin'), controllers.cars.addPost)
+  app.get('/cars/all', controllers.cars.all)
 
   app.all('*', (req, res) => {
     res.status(404)
