@@ -1,0 +1,1 @@
+db.cars.update({}, {$set: {createdOn: Date.now()}}, {multi: true})
