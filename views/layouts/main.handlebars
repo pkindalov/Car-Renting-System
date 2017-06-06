@@ -10,6 +10,9 @@
         <ul class="menu">
             <li><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
+            {{#if isAdmin}}
+                <li><a href="/cars/add">Add Car</a></li>
+            {{/if}}
             <li></li>
               {{#if currentUser}}
                 <li>{{currentUser.username}}</li>
