@@ -24,12 +24,22 @@ module.exports = {
           image: carReq.image
         })
         .then(car => {
-          res.redirect('/cars/all')
+          res.redirect('cars/all')
         })
         .catch(err => {
           let message = errorHandler.handleMongooseError(err)
           res.locals.globalError = message
           res.render('cars/add', carReq)
         })
+  },
+  all: (req, res) => {
+    Car
+            .find({})
+            .sort('-createdOn')
+            .then(cars => {
+              res.render('cars/all', {
+                cars: cars
+              })
+            })
   }
 }
