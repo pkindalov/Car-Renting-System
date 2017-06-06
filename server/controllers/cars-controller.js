@@ -33,9 +33,14 @@ module.exports = {
         })
   },
   all: (req, res) => {
+    let pageSize = 2
+    let page = req.query.page || 1
+
     Car
             .find({})
             .sort('-createdOn')
+            .skip((page - 1) * pageSize)
+            .limit(pageSize)
             .then(cars => {
               res.render('cars/all', {
                 cars: cars
