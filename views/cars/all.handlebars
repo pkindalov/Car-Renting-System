@@ -13,3 +13,15 @@
 {{else}}
     <h2>No cars available</h2>
 {{/each}}
+
+
+<div class="font-3x">
+    {{#if hasPrevPage}}
+        <a href="/cars/all?page={{prevPage}}">&lt; Back</a>
+        &nbsp; &nbsp; &nbsp; &nbsp 
+    {{/if}}
+
+    {{#if hasNextPage}}
+        <a href="/cars/all?page={{nextPage}}">Forward &gt;</a>
+    {{/if}}
+</div>
