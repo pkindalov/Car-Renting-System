@@ -90,7 +90,9 @@ module.exports = {
                           })
                     })
                   .catch(err => {
-
+                    let message = errorHandler.handleMongooseError(err)
+                    res.locals.globalError = message
+                    res.render('cars/all')
                   })
         })
         .catch(err => {
