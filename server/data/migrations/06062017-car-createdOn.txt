@@ -1,1 +1,3 @@
 db.cars.update({}, {$set: {createdOn: Date.now()}}, {multi: true})
+db.getCollection('cars').update({}, {$set: {"isRented": false}}, {multi: true})
+db.getCollection('rentings').update({}, {$set: {rentedOn: Date.now()}}, {multi: true})
