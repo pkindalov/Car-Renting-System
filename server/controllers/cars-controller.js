@@ -1,4 +1,6 @@
-const Car = require('mongoose').model('Car')
+const mongoose = require('mongoose')
+const Car = mongoose.model('Car')
+const Renting = require('../data/Renting')
 const errorHandler = require('../utilities/error-handler')
 
 module.exports = {
@@ -37,7 +39,7 @@ module.exports = {
     let page = parseInt(req.query.page) || 1
     let search = req.query.search
 
-    let query = Car.find()
+    let query = Car.find({isRented: false})
 
     if (search) {
       query = query.where('make').regex(new RegExp(search, 'i'))
@@ -57,5 +59,44 @@ module.exports = {
                 search: search
               })
             })
+  },
+  rent: (req, res) => {
+    let userId = req.user._id
+    let carId = req.params.id
+    let days = parseInt(req.body.days)
+
+    Car
+        .findById(carId)
+        .then(car => {
+          if (car.isRented) {
+            res.locals.globalError = 'Car is already rented'
+            res.render('/cars/all')
+            return
+          }
+
+          Renting
+                    .create({
+                      user: userId,
+                      car: carId,
+                      days: days,
+                      totalPrice: car.pricePerDay * days
+                    })
+                    .then(renting => {
+                      car.isRented = true
+                      car
+                          .save()
+                          .then(car => {
+                            res.redirect('/users/profile')
+                          })
+                    })
+                  .catch(err => {
+
+                  })
+        })
+        .catch(err => {
+          let message = errorHandler.handleMongooseError(err)
+          res.locals.globalError = message
+          res.render('cars/all')
+        })
   }
 }
