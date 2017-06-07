@@ -7,7 +7,8 @@ let carSchema = new mongoose.Schema({
   pricePerDay: {type: Number, required: true},
   power: {type: Number},
   createdOn: {type: Date, default: Date.now()},
-  image: {type: String, required: true}
+  image: {type: String, required: true},
+  isRented: {type: Boolean, default: false}
 })
 
 let Car = mongoose.model('Car', carSchema)
