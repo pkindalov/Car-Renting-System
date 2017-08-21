@@ -4,7 +4,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId
 let rentingSchema = new mongoose.Schema({
   user: {type: ObjectId, required: true, ref: 'User'},
   car: {type: ObjectId, required: true, ref: 'Car'},
-  rentedOn: {type: Date, default: Date.now()},
+  rentedOn: {type: Date, default: Date.now},
   days: {type: Number, required: true},
   totalPrice: {type: Number, required: true}
 })
